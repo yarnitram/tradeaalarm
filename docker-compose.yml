@@ -1,0 +1,8 @@
+services:
+  api:
+    image: node:22
+    working_dir: /app
+    volumes: [".:/app"]
+    command: npm run dev:api
+    ports: ["3000:3000"]
+    environment: { PORT: "3000", MEXC_EMA_SCANNER_API_KEY: "dev-scanner-key" }

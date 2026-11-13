@@ -1,0 +1,1 @@
+{"expo":{"name":"TradeAlarm","slug":"tradealarm","scheme":"tradealarm","plugins":["expo-router","expo-notifications"],"android":{"notification":{"icon":"./assets/notification-icon.png","color":"#72F2A5"}},"ios":{"supportsTablet":true}}}

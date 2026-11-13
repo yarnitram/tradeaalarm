@@ -1,0 +1,6 @@
+create table if not exists public.devices (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, expo_push_token text not null unique, platform text not null check (platform in ('ios','android')), created_at timestamptz not null default now(), last_seen_at timestamptz not null default now());
+create table if not exists public.alerts (id uuid primary key default gen_random_uuid(), source text not null, event_id text not null, event_type text not null, symbol text not null, exchange text, market text, timeframe text not null, side text not null, price numeric, priority text not null, occurred_at timestamptz not null, received_at timestamptz not null default now(), metadata jsonb not null default '{}', unique(source,event_id));
+alter table public.devices enable row level security; alter table public.alerts enable row level security;
+create policy "users manage own devices" on public.devices for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "authenticated users read alerts" on public.alerts for select to authenticated using (true);
+create index if not exists alerts_received_at_idx on public.alerts(received_at desc);

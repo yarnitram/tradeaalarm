@@ -1,0 +1,7 @@
+{
+  "name": "tradealarm",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {"dev:api": "npm --workspace apps/api run dev", "test": "npm run test --workspaces --if-present", "typecheck": "npm run typecheck --workspaces --if-present"},
+  "devDependencies": {"typescript": "^5.6.3"}
+}
